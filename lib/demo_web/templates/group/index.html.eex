@@ -1,0 +1,11 @@
+<%= for group <- @groups do %>
+  <div class="group" data-id="<%= group["id"] %>">
+    <h2><%= group["name"] %></h2>
+    <p><%= group["description"] %></p>
+    <div class="products">
+      <%= for product <- group["products"] do %>
+        <%= render DemoWeb.ProductView, "show.html", conn: @conn, product: product %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

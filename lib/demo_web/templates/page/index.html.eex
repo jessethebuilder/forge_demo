@@ -1,0 +1,21 @@
+<div id="checkout">
+
+</div>
+
+<script type="text/template" id="item_template">
+  <div class="item">
+    <p>
+      <%%= name %>
+      <small>
+        $<%%= amount.toFixed(2) %>
+      </small>
+    </p>
+</script>
+
+<div id="menu">
+  <h1><%= @menu["name"] %></h1>
+  <p><%= @menu["description"] %></p>
+  <div id="groups">
+    <%= render DemoWeb.GroupView, "index.html", conn: @conn, groups: @menu["groups"] %>
+  </div>
+</div>
