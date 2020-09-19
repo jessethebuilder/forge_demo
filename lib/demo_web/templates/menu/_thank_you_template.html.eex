@@ -1,0 +1,47 @@
+<script type="text/template" id="thank_you_template">
+  <h1>Thank you!</h1>
+  <h2>Your order has been submitted</h2>
+  <h3>Items</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Group</th>
+        <th>Item</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%% let items = order.get("items").models %>
+      <%% for(let i = 0; i < items.length; i++){ %>
+        <tr>
+          <%% let item = items[i] %>
+          <td><%%= item.get("group_name") %></td>
+          <td><%%= item.get("product_name") %></td>
+          <td>$<%%= item.get("amount") %></td>
+        </tr>
+      <%% } %>
+        <tr class="tax_row">
+          <td></td>
+          <td>Tax</td>
+          <td>$<%%= order.get("tax").toFixed(2) %></td>
+        </tr>
+        <tr class="tip_row">
+          <td></td>
+          <td>Tip</td>
+          <td>$<%%= order.get("tip").toFixed(2) %></td>
+        </tr>
+        <tr class="total_row">
+          <td>Total</td>
+          <td></td>
+          <td>$<%%= order.total().toFixed(2) %></td>
+        </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:40px;"   class="text-center">
+    <h4>
+      <a href="<%%= order.get("success_path") %>" class="btn btn-success">
+        Return to Menu
+      </a>
+    </h4>
+  </div>
+</script>

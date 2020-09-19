@@ -9,11 +9,43 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
+      <%= render "_nav.html" %>
+      <% if get_flash(@conn, :info) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <% if get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
     <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+
+    <script type="text/javascript">
+      window.checkoutBuilder = new CheckoutBuilder(
+        {
+          tax_rate: 0.0873,
+          success_path: "/",
+          menu_id: $("#menu").data("id")
+        },
+        {
+          itemAdded: function(item, element){
+            console.log("Item ADDED to Order!");
+            // The element param is the wrapper element related to this item, which
+            // will contain other settings, such as side-order options. All Product elements
+            // in #menu will have a class of "product" and data params of id, price, and name.
+
+          },
+          itemRemoved: function(item){
+            console.log("Item REMOVED from Order!");
+          },
+          orderSynced: function(order){
+            console.log("Order SYNCED!");
+          }
+        }
+      );
+
+      window.checkoutBuilder.build(); // Entry point for Forge Checkout.
+    </script>
   </body>
 </html>

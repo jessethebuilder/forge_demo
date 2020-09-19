@@ -1,0 +1,26 @@
+<script>
+
+let orderBuilder = new OrderBuilder(
+  {
+    tax_rate: 0.0873,
+    success_path: "/"
+  },
+  {
+    itemAdded: function(item, element){
+      console.log("Item ADDED to Order!");
+      // The element param is the wrapper element related to this item, which
+      // will contain other settings, such as side-order options. All Product elements
+      // in #menu will have a class of "product" and data params of id, price, and name.
+
+    },
+    itemRemoved: function(item){
+      console.log("Item REMOVED from Order!");
+    },
+    orderSynced: function(order){
+      console.log("Order SYNCED!");
+    }
+  }
+);
+
+orderBuilder.build();
+</script>

@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div id="menu" data-id="<%= @menu["id"] %>">
+        <h1><%= @menu["name"] %></h1>
+        <p><%= @menu["description"] %></p>
+        <div id="groups">
+          <%= for group <- @menu["groups"] do %>
+            <div class="group" data-id="<%= group["id"] %>">
+              <h2><%= group["name"] %></h2>
+              <p><%= group["description"] %></p>
+              <div class="products">
+                <%= for product <- group["products"] do %>
+                  <div class="product"
+                       data-id="<%= product["id"] %>"
+                       data-price="<%= product["price"] %>"
+                       data-name="<%= product["name"] %>">
+                    <h3><%= product["name"] %></h3>
+                    <p><%= product["description"] %></p>
+                    <h4>
+                      <%= product["price"] %>
+                      <button class="add_to_cart float-right btn btn-primary">
+                        +
+                      </button>
+                    </h4>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div id="checkout">
+    </div>
+  </div>
+</div>
+<!-- The following 2 templates need to appear in the body of the menu for Forge
+     Checkout to work. Additional scripts can be called AFTER Forge Checkout is loaded,
+     so in this app, at the bottom of layout/app -->
+<%= render "_checkout_template.html", conn: @conn %>
+<%= render "_thank_you_template.html", conn: @conn %>

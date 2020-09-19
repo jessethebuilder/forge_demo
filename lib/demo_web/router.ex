@@ -5,7 +5,6 @@ defmodule DemoWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -16,7 +15,8 @@ defmodule DemoWeb.Router do
   scope "/", DemoWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", MenuController, :index
+    post "/orders", OrderController, :create
   end
 
   # Other scopes may use custom stacks.
