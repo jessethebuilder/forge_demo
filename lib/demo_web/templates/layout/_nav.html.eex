@@ -7,8 +7,7 @@
   <a class="navbar-brand" href="/">Forge Demo</a>
   <ul class="navbar-nav mr-auto">
   </ul>
-  <div name="checkout_launch"
-       class="btn btn-outline-success btn-sm my-2 my-sm-0" style="display:none">
+  <div name="checkout_launch" style="display:none">
     Cart <span name="item_count"></span>
   </div>
 </nav>

@@ -3,12 +3,12 @@
     <div class="col-12">
       <div id="menu" data-id="<%= @menu["id"] %>">
         <h1><%= @menu["name"] %></h1>
-        <p><%= @menu["description"] %></p>
+        <!-- <p><%= @menu["description"] %></p> -->
         <div id="groups">
           <%= for group <- @menu["groups"] do %>
             <div class="group" data-id="<%= group["id"] %>">
               <h2><%= group["name"] %></h2>
-              <p><%= group["description"] %></p>
+              <!-- <p><%= group["description"] %></p> -->
               <div class="products">
                 <%= for product <- group["products"] do %>
                   <div class="product"
@@ -17,12 +17,8 @@
                        data-name="<%= product["name"] %>">
                     <h3><%= product["name"] %></h3>
                     <p><%= product["description"] %></p>
-                    <h4>
-                      <%= product["price"] %>
-                      <button class="add_to_cart float-right btn btn-primary">
-                        +
-                      </button>
-                    </h4>
+                    <h4 class="price"><%= product["price"] %></h4>
+                    <p class="add_to_cart_wrapper"><a class="add_to_cart"></a></p>
                   </div>
                 <% end %>
               </div>

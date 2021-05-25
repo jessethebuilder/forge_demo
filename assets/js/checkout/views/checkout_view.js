@@ -55,7 +55,7 @@ var CheckoutView = Backbone.View.extend({
     this.model.save();
     let modal_body = this.$el.find(".modal-body");
     modal_body.css({height: modal_body.height() + "px"})
-    modal_body.html("<h3>Submitting Order....</h3>");
+    modal_body.html('<h3 class="submitting_order">Submitting Order....</h3>');
   },
   updateNote: function(event){
     // DRY this with updateTip

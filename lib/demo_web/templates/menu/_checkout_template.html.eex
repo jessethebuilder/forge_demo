@@ -1,9 +1,9 @@
 <script type="text/template" id="checkout_template">
-  <div class="modal fade" id="checkout_modal" name="checkout_modal" tabindex="-1" role="dialog">
+  <div class="modal fade" id="checkout_view" name="checkout_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Checkout</h5>
+          <h2 class="modal-title">Checkout</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -18,57 +18,51 @@
 <script type="text/template" id="checkout_item_template">
   <div class="item">
     <div class="row">
-      <div class="col-4">
+      <div class="col-6">
         <%%= name %>
       </div>
-      <div class="col-2">
+      <div class="col-4">
         <small>
           $<%%= amount.toFixed(2) %>
         </small>
       </div>
-      <div class="col-3">
-        <input name="note" class="form-control" placeholder="note.." value="<%%= note %>"/>
-      </div>
-      <div class="col-3">
-        <button name="remove" class="btn btn-sm btn-danger float-right">
-          <small>
-            Remove
-          </small>
-        </button>
+      <div class="col-2">
+        <a href="javascript://" name="remove" class="float-right">
+        </a>
       </div>
     </div>
 </script>
 
 <script type="text/template" id="checkout_form_template">
   <form action="/orders" method="POST" id="checkout_form" name="checkout_form">
-    <h3 class="text-center">Checkout</h3>
     <div name="items">
     </div>
     <div class="row tax_row">
-      <div class="col-4">Tax</div>
+      <div class="col-6">Tax</div>
       <div class="col-4">
         <div class="tax">
           $<%%= order.tax().toFixed(2) %>
         </div>
       </div>
-      <div class="col-4"></div>
+      <div class="col-2"></div>
     </div>
     <div class="row tip_row">
-      <div class="col-4">Tip:</div>
+      <div class="col-6">Tip:</div>
       <div class="col-4">
-        <%% tip = order.get("tip") %>
+        <%% var tip = order.get("tip") %>
+        <%% var placeholder = "20% is $" + (order.total() * 0.2).toFixed(2) %>
         <%% if(tip === 0){ %>
           <input type="text" name="tip" id="tip"
-                 class="form-control" autofocus  />
+                 class="form-control" autofocus placeholder="<%%= placeholder %>" />
         <%% } else { %>
           <input type="text" name="tip" id="tip"
-                 class="form-control" value="<%%= tip %>"  />
+                 class="form-control" value="<%%= tip %>" placeholder="<%%= placeholder %>" />
         <%% } %>
       </div>
-      <div class="col-4"></div>
+      <div class="col-2"></div>
     </div>
-    <div class="row">
-      <div class="col-4">
+    <div class="row total_row">
+      <div class="col-6">
         <strong>TOTAL</strong>
       </div>
       <div class="col-4">
@@ -76,13 +70,13 @@
           <strong>$<%%= order.total().toFixed(2) %></strong>
         </div>
       </div>
-      <div class="col-4"></div>
+      <div class="col-2"></div>
     </div>
-    <div class="row">
+    <div class="row note_row">
       <div class="col">
         <div class="form-group">
           <textarea name="note" id="note"
-                    placeholder="Order note.." class="form-control"></textarea>
+                    placeholder="Notes.." class="form-control"></textarea>
         </div>
 
         <div class="form-group">
@@ -93,7 +87,7 @@
         <div class="row">
           <div class="col-8">
             <div class="form-group">
-              <input type="input" name="cc_expires" id="cc_expires"
+              <input type="text" name="cc_expires" id="cc_expires"
                      class="form-control"
                      placeholder="dd/mm" />
             </div>
@@ -108,8 +102,8 @@
         </div>
         <div class="form-group">
           <input type="submit"
-                 class="btn btn-primary form-control"
-                 value="Purchase Now" />
+                 class="buy_button form-control"
+                 value="Buy" />
         </div>
       </div>
     </div>

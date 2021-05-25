@@ -1,0 +1,156 @@
+@mixin border_radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+$hover_color: red;
+
+$text_color: black;
+$background_color: white;
+$inverse_text_color: white;
+$inverse_background_color: black;
+
+
+body {
+  color: $text_color;
+  background: $background_color;
+  font-family: Raleway;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Ranchers;
+  letter-spacing: 0.3em;
+  color: black;
+  text-align: center;
+}
+
+h1 {
+  font-size: 140px;
+  margin-bottom: 60px;
+  margin-top: 40px;
+}
+
+h2 {
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+p {
+  text-align: center;
+  color: #333;
+}
+
+.product {
+  margin-bottom: 80px;
+
+  .price {
+    text-align: center;
+    cursor: pointer;
+    font-size: 26px;
+  }
+
+  .add_to_cart_wrapper {
+    margin-top: 36px;
+    .add_to_cart {
+      text-align: center;
+      background-color: $inverse_background_color;
+      color: $inverse_text_color;
+      padding: 16px 20px;
+      font-family: Ranchers;
+      letter-spacing: 0.3em;
+      @include border_radius(8px);
+      cursor: pointer;
+
+      &::before {
+        content: 'Buy';
+      }
+
+      &:hover {
+        color: $hover_color;
+      }
+    } // .add_to_cart
+  }  // .add_to_cart_wrapper
+}
+
+.submitting_order {
+  margin-top: 80px;
+}
+
+// Forms ---
+input[type=text], input[type=email], input[type=phone], textarea {
+  @include border_radius(0);
+  border-width: 0 0 2px 0;
+  border-color: $text_color;
+
+  &:focus {
+    outline:0px !important;
+   -webkit-appearance:none;
+   box-shadow: none !important;
+   border-color: $text_color;
+
+    // outline: none;
+    // border: 0;
+  }
+}
+
+// Checkout View ---
+
+#checkout_view {
+  .modal-header {
+    border: 0;
+  }
+
+  .modal-content {
+    @include border_radius(0);
+  }
+
+  .item, .tip_row, .tax_row, .total_row {
+    font-family: Rancher;
+    font-size: 22px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+  }
+
+  .buy_button {
+    font-family: Ranchers;
+    font-size: 32px;
+    letter-spacing: 0.3em;
+    color: $inverse_text_color;
+    background-color: $inverse_background_color;
+    border: 0;
+    margin-top: 50px;
+    @include border_radius(12px);
+
+    &:hover {
+      color: $hover_color;
+    }
+  }
+
+  [name=remove] {
+    color: $danger;
+    text-decoration: none;
+    font-size: 12px;
+
+    &::before {
+      content: 'remove';
+    }
+  }
+} // #checkout_view
+
+// Checkout Launch Button ---
+
+[name=checkout_launch] {
+  color: white;
+  border: 0;
+  font-size: 22px;
+  font-family: Ranchers;
+  letter-spacing: 0.25em;
+  cursor: pointer;
+
+  &:hover, &:active {
+    border: 0;
+    color: $hover_color;
+    background: transparent;
+  }
+}
