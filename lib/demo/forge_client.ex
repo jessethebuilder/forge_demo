@@ -1,23 +1,27 @@
 defmodule Demo.ForgeClient do
   def get_menus(token) do
     url = "#{api_root()}/menus?deep=true"
-    {:ok, response} = HTTPoison.get(url, headers(token))
-    {:ok, menus} = Poison.decode(response.body)
-    {:ok, menus}
+    response = HTTPoison.get!(url, headers(token))
+    Poison.decode(response.body)
   end
 
   def get_menu(token, menu_id) do
     url = "#{api_root()}/menus/#{menu_id}?deep=true"
-    {:ok, response} = HTTPoison.get(url, headers(token))
-    {:ok, menu} = Poison.decode(response.body)
-    {:ok, menu}
+    response = HTTPoison.get!(url, headers(token))
+    Poison.decode(response.body)
+  end
+
+  def get_order(token, order_id) do
+    url = "#{api_root()}/orders/#{order_id}.json"
+    response = HTTPoison.get!(url, headers(token))
+    Poison.decode(response.body)
   end
 
   def create_order(token, order_params) do
     url = "#{api_root()}/orders.json"
-    params = Poison.encode!(order_params)
+    params = Poison.encode!(%{order: order_params})
     response = HTTPoison.post!(url, params, headers(token))
-    {:ok, Poison.decode!(response.body)}
+    Poison.decode(response.body)
   end
 
   def headers(token) do
